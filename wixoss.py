@@ -37,12 +37,16 @@ while True:
 
 print(len(cards))
 
-open('cards.csv', 'a').close()
-with open('cards.csv', 'w', encoding="utf-8", newline='') as f:
-    f.truncate()
-    writer = csv.writer(f)
-    header = ["code", "name", "type", "imageUrl"]
-    writer.writerow(header)
-    for card in cards.values():
-        row = [card[key] for key in header]
-        writer.writerow(row)
+def write_file(filename, separator):
+    open(filename, 'a').close()
+    with open(filename, 'w', encoding="utf-8", newline='') as f:
+        f.truncate()
+        writer = csv.writer(f, delimiter = separator)
+        header = ["code", "name", "type", "imageUrl"]
+        writer.writerow(header)
+        for card in cards.values():
+            row = [card[key] for key in header]
+            writer.writerow(row)
+
+write_file("cards.csv", ",")
+write_file("cards.tsv", "\t")
