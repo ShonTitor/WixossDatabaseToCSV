@@ -18,10 +18,10 @@ while True:
         break
 
     for item in items:
-        card_name = item["name"].strip()
-        card_no = item["card_no"].strip()
+        card_name = item["name"].strip() or " "
+        card_no = item["card_no"].strip()  or " "
         image_url = f"https://www.takaratomy.co.jp/products/en.wixoss/card/thumb/{card_no}.jpg"
-        card_type = item["card_type"].strip()
+        card_type = item["card_type"].strip()  or " "
 
         print(card_name, card_no)
 
