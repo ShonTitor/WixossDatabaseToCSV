@@ -8,6 +8,7 @@ cards = {}
 page = 0
 while True:
     base_url = f"https://www.takaratomy.co.jp/products/en.wixoss/card/itemsearch.php?p={page}"
+    print(f"page {page}")
 
     r = requests.get(base_url, "r")
 
@@ -17,10 +18,10 @@ while True:
         break
 
     for item in items:
-        card_name = item["name"]
-        card_no = item["card_no"]
+        card_name = item["name"].strip()
+        card_no = item["card_no"].strip()
         image_url = f"https://www.takaratomy.co.jp/products/en.wixoss/card/thumb/{card_no}.jpg"
-        card_type = item["card_type"]
+        card_type = item["card_type"].strip()
 
         print(card_name, card_no)
 
@@ -34,7 +35,6 @@ while True:
         cards[card_no] = card_dict 
     time.sleep(0.1)
     page += 1
-
 print(len(cards))
 
 def write_file(filename, separator):
