@@ -1,3 +1,14 @@
+// ==UserScript==
+// @name        Wixoss Tabletop Simulator Exporter
+// @namespace   Violentmonkey Scripts
+// @match       https://dexoss.app/deck/*
+// @match       https://www.wixosstcg.eu/deck/*
+// @grant       none
+// @version     1.0
+// @author      Riokaru
+// @description 9/5/2023, 1:12:42 AM
+// ==/UserScript==
+
 function getDexoss() {
   var rows = document.getElementsByClassName("item");
   var cards = [];
@@ -61,9 +72,6 @@ function showWixossTCGEU() {
 
 const host = window.location.host;
 
-//console.log("Loading deck importer extension");
-//console.log(host);
-
 const modalString = `
 <div id="ttsModal" style="display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4);z-index:10">
 <div style="background-color: #fefefe;margin: 15% auto;padding: 20px;border: 1px solid #888;width: 80%;">
@@ -84,7 +92,7 @@ if (host == "dexoss.app") {
   new_button.classList.add('ui', 'grey', 'button');
   new_button.textContent = "Export to TTS";
   new_button.addEventListener("click", showDexoss);
-  
+
   old_button.insertAdjacentElement('afterend', new_button);
 }
 else if (host == "www.wixosstcg.eu") {
@@ -93,6 +101,6 @@ else if (host == "www.wixosstcg.eu") {
   new_button.classList.add('btn', 'btn-primary', 'dropdown-toggle');
   new_button.textContent = "Export to TTS";
   new_button.addEventListener("click", showWixossTCGEU);
-  
+
   old_button.insertAdjacentElement('afterend', new_button);
 }
