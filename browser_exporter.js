@@ -20,7 +20,7 @@ function getDexoss() {
   var card_qty = {}
   for (var i=0; i < rows.length; i++) {
       var row = rows[i];
-      if (row.role != "listitem") {
+      if (row.getAttribute("role") != "listitem") {
          continue;
       }
       var description = row.getElementsByClassName("description")[0];
