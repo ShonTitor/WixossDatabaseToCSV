@@ -6,7 +6,11 @@
 // @grant       none
 // @version     1.0
 // @author      Riokaru
-// @description 9/5/2023, 1:12:42 AM
+// @description Adds 'Export to TTS' button for Dexoss and wixosstcg.eu deckbuilders to display decks in JSON format. Made by Riokaru.
+// @run-at      document-idle
+// @icon        https://i.imgur.com/IWLR5R3.png
+// @downloadURL https://github.com/ShonTitor/WixossImportTool/blob/main/browser_exporter.js
+// @supportURL  https://github.com/ShonTitor/WixossImportTool/blob/main/browser_exporter.js
 // ==/UserScript==
 
 function getDexoss() {
@@ -70,37 +74,54 @@ function showWixossTCGEU() {
   document.getElementById("closeModal").addEventListener("click", hideModal);
 }
 
-const host = window.location.host;
+function main() {
+  const host = window.location.host;
 
-const modalString = `
-<div id="ttsModal" style="display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4);z-index:10">
-<div style="background-color: #fefefe;margin: 15% auto;padding: 20px;border: 1px solid #888;width: 80%;">
-  <span id="closeModal" class="close" style="color: #aaa;float: right;font-size: 28px;font-weight: bold;">&times;</span>
-  <h1>Export to Tabletop Simulator</h1>
-  <code id="ttsModalContent">Deck</code>
-  <br><br>
-  <strong>Copy this code and paste it in the Tabletop Simulator Notebook to import your deck.</strong>
-</div>
-</div>`;
-const parser = new DOMParser();
-const modal = parser.parseFromString(modalString, 'text/html');
-document.body.appendChild(modal.documentElement);
+  const modalString = `
+  <div id="ttsModal" style="display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4);z-index:10">
+  <div style="background-color: #fefefe;margin: 15% auto;padding: 20px;border: 1px solid #888;width: 80%;">
+    <span id="closeModal" class="close" style="color: #aaa;float: right;font-size: 28px;font-weight: bold;">&times;</span>
+    <h1>Export to Tabletop Simulator</h1>
+    <code id="ttsModalContent">Deck</code>
+    <br><br>
+    <strong>Copy this code and paste it in the Tabletop Simulator Notebook to import your deck.</strong>
+  </div>
+  </div>`;
+  const parser = new DOMParser();
+  const modal = parser.parseFromString(modalString, 'text/html');
+  document.body.appendChild(modal.documentElement);
 
-if (host == "dexoss.app") {
-  const old_button = document.getElementsByName("export")[0];
-  const new_button = document.createElement('button');
-  new_button.classList.add('ui', 'grey', 'button');
-  new_button.textContent = "Export to TTS";
-  new_button.addEventListener("click", showDexoss);
+  if (host == "dexoss.app") {
+    const old_button = document.getElementsByName("export")[0];
+    const new_button = document.createElement('button');
+    new_button.classList.add('ui', 'grey', 'button');
+    new_button.textContent = "Export to TTS";
+    new_button.addEventListener("click", showDexoss);
 
-  old_button.insertAdjacentElement('afterend', new_button);
+    old_button.insertAdjacentElement('afterend', new_button);
+  }
+  else if (host == "www.wixosstcg.eu") {
+    const old_button = document.getElementById("dropdownMenu1");
+    const new_button = document.createElement('button');
+    new_button.classList.add('btn', 'btn-primary', 'dropdown-toggle');
+    new_button.textContent = "Export to TTS";
+    new_button.addEventListener("click", showWixossTCGEU);
+
+    old_button.insertAdjacentElement('afterend', new_button);
+  }
 }
-else if (host == "www.wixosstcg.eu") {
-  const old_button = document.getElementById("dropdownMenu1");
-  const new_button = document.createElement('button');
-  new_button.classList.add('btn', 'btn-primary', 'dropdown-toggle');
-  new_button.textContent = "Export to TTS";
-  new_button.addEventListener("click", showWixossTCGEU);
 
-  old_button.insertAdjacentElement('afterend', new_button);
+const host = window.location.host;
+if (host == "dexoss.app") {
+  (new MutationObserver(check)).observe(document, {childList: true, subtree: true});
+
+  function check(changes, observer) {
+      if(document.querySelector("button[name='export']")) {
+          observer.disconnect();
+          main();
+      }
+  }
+}
+else {
+  main();
 }
