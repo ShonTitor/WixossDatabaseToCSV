@@ -111,16 +111,16 @@ function main() {
   }
 }
 
+function check(changes, observer) {
+  if(document.querySelector("button[name='export']")) {
+      observer.disconnect();
+      main();
+  }
+}
+
 const host = window.location.host;
 if (host == "dexoss.app") {
   (new MutationObserver(check)).observe(document, {childList: true, subtree: true});
-
-  function check(changes, observer) {
-      if(document.querySelector("button[name='export']")) {
-          observer.disconnect();
-          main();
-      }
-  }
 }
 else {
   main();
