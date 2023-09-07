@@ -4,14 +4,14 @@
 // @match       https://dexoss.app/deck/*
 // @match       https://www.wixosstcg.eu/deck/*
 // @grant       none
-// @version     1.2
+// @version     1.4
 // @author      Riokaru
 // @description Adds 'Export to TTS' button for Dexoss and wixosstcg.eu deckbuilders to display decks in JSON format. Made by Riokaru.
 // @run-at      document-idle
 // @license     MIT
 // @icon        https://i.imgur.com/IWLR5R3.png
 // @downloadURL https://github.com/ShonTitor/WixossImportTool/blob/main/browser_exporter.js
-// @supportURL  https://github.com/ShonTitor/WixossImportTool/blob/main/browser_exporter.js
+// @supportURL  https://github.com/ShonTitor/WixossImportTool
 // ==/UserScript==
 
 function getDexoss() {

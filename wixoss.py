@@ -86,15 +86,26 @@ while True:
     page += 1
 print(len(cards))
 
+print("\nThe following images are missing from the database:")
 for m in missing:
     print(m)
+
+header = ["code", "name", "type", "imageUrl"]
+to_add = {}
+with open('missing.tsv', newline='') as csvfile:
+    reader = csv.reader(csvfile, delimiter="\t")
+    next(reader)
+    for row in reader:
+        to_add[row[0]] = {h:row[i] for i, h in enumerate(header)}
+
+to_add.update(cards)
+cards = to_add
 
 def write_file(filename, separator):
     open(filename, 'a').close()
     with open(filename, 'w', encoding="utf-8", newline='') as f:
         f.truncate()
-        writer = csv.writer(f, delimiter = separator)
-        header = ["code", "name", "type", "imageUrl"]
+        writer = csv.writer(f, delimiter=separator)
         writer.writerow(header)
         for card in cards.values():
             row = [card[key] for key in header]
