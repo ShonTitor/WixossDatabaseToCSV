@@ -92,14 +92,13 @@ for m in missing:
 
 header = ["code", "name", "type", "imageUrl"]
 to_add = {}
-with open('missing.tsv', newline='') as csvfile:
+with open('missing.tsv', encoding="utf-8", newline='') as csvfile:
     reader = csv.reader(csvfile, delimiter="\t")
     next(reader)
     for row in reader:
         to_add[row[0]] = {h:row[i] for i, h in enumerate(header)}
 
-to_add.update(cards)
-cards = to_add
+cards.update(to_add)
 
 def write_file(filename, separator):
     open(filename, 'a').close()
