@@ -20,7 +20,7 @@ In the table below you can find the most popular script managers for the most po
 
 ### Step 2: Install the Wixoss Exporter user script
 
-Once you have a script manager installed. You can install the Wixoss Deck Exporter from [GreasyFork](https://greasyfork.org/en/scripts/474626-wixoss-tabletop-simulator-exporter).
+Once you have a script manager installed. You can install the Wixoss Deck Exporter from [here](https://greasyfork.org/en/scripts/474626-wixoss-tabletop-simulator-exporter).
 You can see the source code [here](https://github.com/ShonTitor/WixossImportTool/blob/main/browser_exporter.js).
 The user script only has permission to act on [DeXoss](https://dexoss.app/home) and [wixosstcg.eu](https://www.wixosstcg.eu) and only in the individual deck pages.
 
