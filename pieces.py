@@ -16,7 +16,7 @@ with open('cards_database_en.tsv', newline='', encoding="utf-8") as csvfile:
         rows.append(row)
         #cod = re.sub(r"[-\[\]]", "", row[0])
         cod = row[0]
-        row[-1] = f"https://raw.githubusercontent.com/ShonTitor/WixossImportTool/main/pieces/{cod}.png"
+        row[-1] = f"https://raw.githubusercontent.com/ShonTitor/WixossImportTool/main/pieces/{cod}.jpg"
         print(row)
         path = os.path.join("images", f"{code}.jpg")
         path2 = os.path.join("pieces", f"{code}.jpg")
