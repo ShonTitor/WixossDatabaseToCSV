@@ -23,8 +23,8 @@ ROTATED_PIECES = load_file("pieces.tsv")
 MISSING        = load_file("missing.tsv")
 
 MERGED = EN_DATABASE
-MERGED.update(ROTATED_PIECES)
 MERGED.update(MISSING)
+MERGED.update(ROTATED_PIECES)
 
 MERGED = sorted([row for row in MERGED.values()])
 

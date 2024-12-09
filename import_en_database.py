@@ -11,6 +11,8 @@ SAVE_IMAGES = False
 if "--save-images" in sys.argv:
     SAVE_IMAGES = True
 
+SLEEP_TIME = 0
+
 cards = {}
 
 rarity_url = "https://www.takaratomy.co.jp/products/en.wixoss/card/master.php?m=rarity"
@@ -32,10 +34,10 @@ special_rarity_cards = []
 page = 0
 while True:
     base_url = f"https://www.takaratomy.co.jp/products/en.wixoss/card/itemsearch.php?p={page}"
-    print(f"page {page}")
+    print(f"\n=== page {page} ===\n")
 
     r = requests.get(base_url, "r")
-    time.sleep(0.2)
+    time.sleep(SLEEP_TIME)
 
     items = json.loads(r.content)["items"]
     if len(items) == 0:
@@ -62,7 +64,7 @@ while True:
             if SAVE_IMAGES and not os.path.exists(filename):
                 print(f"Saving {image_url}")
                 r = requests.get(image_url)
-                time.sleep(0.2)
+                time.sleep(SLEEP_TIME)
                 if r.status_code != 200:
                     print(f"Error: status code {r.status_code}")
                     missing.append(f"{card_name} ({code})")
@@ -73,7 +75,7 @@ while True:
             elif not os.path.exists(filename):
                 print(f"Checking {image_url}")
                 r = requests.get(image_url)
-                time.sleep(0.2)
+                time.sleep(SLEEP_TIME)
                 if r.status_code != 200:
                     print(f"Error: status code {r.status_code}")
                     missing.append(f"{card_name} ({code})")
